@@ -4,7 +4,11 @@
   <img src="icon.png" alt="SIP Indoor Station icon" width="96">
 </p>
 
-[![Add repository to Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=arturzx&repository=sip-indoor-station-card&category=plugin)
+<p align="center">
+  <a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=arturzx&repository=sip-indoor-station-card&category=plugin">
+    <img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Open SIP Indoor Station Card in HACS">
+  </a>
+</p>
 
 Home Assistant Lovelace custom card for SIP Indoor Station.
 
@@ -34,7 +38,11 @@ This card wraps `advanced-camera-card` for video, adds microphone support throug
 
 Install this repository in HACS as a dashboard plugin:
 
-[![Add repository to Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=arturzx&repository=sip-indoor-station-card&category=plugin)
+<p align="center">
+  <a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=arturzx&repository=sip-indoor-station-card&category=plugin">
+    <img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Open SIP Indoor Station Card in HACS">
+  </a>
+</p>
 
 HACS downloads `sip-indoor-station-card.js` and registers it as a Home Assistant dashboard resource.
 
