@@ -1,0 +1,15 @@
+{
+  "name": "sip-indoor-station-card",
+  "version": "0.1.39",
+  "description": "Home Assistant custom card for SIP Indoor Station",
+  "type": "module",
+  "scripts": {
+    "check": "node --check sip-indoor-station-card.js"
+  },
+  "keywords": [
+    "home-assistant",
+    "lovelace",
+    "sip"
+  ],
+  "license": "MIT"
+}
