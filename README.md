@@ -27,6 +27,7 @@ This card wraps `advanced-camera-card` for video, adds microphone support throug
   <strong>Ringing</strong>
   <br>
   <img src="screenshots/ringing.png" alt="SIP Indoor Station card ringing state" width="360">
+  <br>
   <strong>Answered</strong>
   <br>
   <img src="screenshots/answered.png" alt="SIP Indoor Station card answered state" width="360">
@@ -67,6 +68,7 @@ type: module
 type: custom:sip-indoor-station-card
 entity_prefix: door_station
 camera: camera.front_door
+device: door_station
 ```
 
 `camera` can also be a single `advanced-camera-card` camera object:
@@ -77,6 +79,7 @@ entity_prefix: door_station
 camera:
   camera_entity: camera.front_door
   live_provider: auto
+device: door_station
 ```
 
 For multiple cameras, use `advanced-camera-card` style directly:
@@ -87,6 +90,7 @@ entity_prefix: door_station
 cameras:
   - camera_entity: camera.front_door
   - camera_entity: camera.side_door
+device: door_station
 ```
 
 The `device` option selects the integration entity name prefix for a door station. It is an alias for `entity_prefix`, so this:
