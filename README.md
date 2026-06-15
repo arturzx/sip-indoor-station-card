@@ -39,11 +39,9 @@ This card wraps `advanced-camera-card` for video, adds microphone support throug
 
 Install this repository in HACS as a dashboard plugin:
 
-<p align="center">
-  <a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=arturzx&repository=sip-indoor-station-card&category=plugin">
-    <img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Open SIP Indoor Station Card in HACS">
-  </a>
-</p>
+<a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=arturzx&repository=sip-indoor-station-card&category=plugin">
+<img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Open SIP Indoor Station Card in HACS">
+</a>
 
 HACS downloads `sip-indoor-station-card.js` and registers it as a Home Assistant dashboard resource.
 
