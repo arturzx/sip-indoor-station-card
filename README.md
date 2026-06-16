@@ -10,9 +10,11 @@
   </a>
 </p>
 
-Home Assistant Lovelace custom card for SIP Indoor Station.
+Home Assistant Lovelace custom cards for SIP Indoor Station.
 
-This card wraps `advanced-camera-card` for video, adds microphone support through WebRTC and controls for the entities exposed by the SIP Indoor Station integration.
+Main card wraps `advanced-camera-card` for video, adds microphone support through WebRTC and controls for the entities exposed by the SIP Indoor Station integration.
+
+History card browses recent intercom calls from the integration API with status icons, snapshot thumbnails, large preview, timestamps, and delete actions.
 
 ## Requirements
 
@@ -132,6 +134,18 @@ device: door_station
 do_not_disturb_entity: input_boolean.door_station_do_not_disturb
 ```
 
+To show a history shortcut in the bottom-left corner, set `history_path`. Optionally set `history_badge_entity` to display a numeric badge from an entity state. The badge is hidden when the entity state is `0`, `unknown`, or `unavailable`.
+
+```yaml
+type: custom:sip-indoor-station-card
+camera: camera.front_door
+device: door_station
+history_path: /domofon/historia-polaczen
+history_badge_entity: sensor.door_station_missed_call_count
+```
+
+The do-not-disturb button is shown in the bottom-right corner when `do_not_disturb_entity` is configured.
+
 For a custom `advanced-camera-card` configuration, pass it through:
 
 ```yaml
@@ -142,4 +156,51 @@ advanced_camera_card:
   cameras:
     - camera_entity: camera.front_door
       live_provider: go2rtc
+```
+
+## History Card
+
+This repository also registers a separate call history card:
+
+```yaml
+type: custom:sip-indoor-station-history-card
+entity_prefix: door_station
+limit: 20
+```
+
+The history card reads call records through the SIP Indoor Station integration API. It refreshes on load, after deletes, and when the `last_call_entity` or `last_missed_call_entity` changes.
+
+The list shows:
+
+- call status icon
+- date and time
+- snapshot thumbnail
+- delete button
+
+Selecting a call opens the detail view with the same date/status header, a large snapshot, and started/answered/ended timestamps.
+
+## Full Featured Dashboard Example
+
+Main intercom view with a call history subview:
+
+```yaml
+title: Intercom
+views:
+  - title: Intercom
+    type: panel
+    cards:
+      - type: custom:sip-indoor-station-card
+        camera: camera.front_door
+        device: door_station
+        do_not_disturb_entity: input_boolean.door_station_do_not_disturb
+        history_path: history
+        history_badge_entity: sensor.door_station_missed_call_count
+  - title: Call history
+    type: panel
+    path: history
+    subview: true
+    cards:
+      - type: custom:sip-indoor-station-history-card
+        entity_prefix: door_station
+        limit: 20
 ```
