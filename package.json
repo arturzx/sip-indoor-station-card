@@ -1,6 +1,6 @@
 {
   "name": "sip-indoor-station-card",
-  "version": "0.1.41",
+  "version": "0.1.42",
   "description": "Home Assistant custom card for SIP Indoor Station",
   "type": "module",
   "scripts": {

@@ -268,7 +268,7 @@ class SipIndoorStationCard extends HTMLElement {
                     : ""
                 }
                 <button class="icon-button corner-button right" id="do-not-disturb" title="Do not disturb" aria-label="Do not disturb">
-                  <ha-icon icon="mdi:volume-high"></ha-icon>
+                  <ha-icon icon="mdi:bell-ring-outline"></ha-icon>
                 </button>
                 <div class="status" id="audio-status">Audio disconnected</div>`
               : ""
@@ -427,7 +427,7 @@ class SipIndoorStationCard extends HTMLElement {
     this._setButtonVisible("open-door", true);
     this._setButtonVisible("do-not-disturb", !!this._entity("do_not_disturb_entity"));
     this._setButtonActive("do-not-disturb", this._state.doNotDisturb);
-    this._setButtonIcon("do-not-disturb", this._state.doNotDisturb ? "mdi:volume-off" : "mdi:volume-high");
+    this._setButtonIcon("do-not-disturb", this._state.doNotDisturb ? "mdi:bell-remove-outline" : "mdi:bell-ring-outline");
     this._renderHistoryBadge();
 
     const audioStatus = this.shadowRoot.getElementById("audio-status");
@@ -1530,4 +1530,4 @@ window.customCards.push({
   preview: false,
 });
 
-console.info("%c SIP Indoor Station Cards %c v0.1.41 ", "color: white; background: #0f766e; font-weight: bold;", "color: #0f766e; background: white; font-weight: bold;");
+console.info("%c SIP Indoor Station Cards %c v0.1.42 ", "color: white; background: #0f766e; font-weight: bold;", "color: #0f766e; background: white; font-weight: bold;");
