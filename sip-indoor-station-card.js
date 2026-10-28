@@ -85,6 +85,7 @@ class SipIndoorStationCard extends HTMLElement {
 
         ha-card {
           overflow: hidden;
+          container-type: inline-size;
         }
 
         advanced-camera-card {
@@ -106,8 +107,8 @@ class SipIndoorStationCard extends HTMLElement {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: clamp(14px, 3vmin, 34px);
-          padding: clamp(16px, 3vmin, 32px);
+          gap: clamp(14px, 3.5cqw, 34px);
+          padding: clamp(16px, 3.5cqw, 32px);
           background: linear-gradient(to top, rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.28) 72%, rgba(0, 0, 0, 0));
           pointer-events: none;
         }
@@ -116,8 +117,8 @@ class SipIndoorStationCard extends HTMLElement {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          width: clamp(72px, 15vmin, 120px);
-          height: clamp(72px, 15vmin, 120px);
+          width: clamp(48px, 14cqw, 120px);
+          height: clamp(48px, 14cqw, 120px);
           border: 0;
           border-radius: 50%;
           color: white;
@@ -137,27 +138,27 @@ class SipIndoorStationCard extends HTMLElement {
         }
 
         .icon-button ha-icon {
-          --mdc-icon-size: clamp(34px, 6.2vmin, 56px);
+          --mdc-icon-size: clamp(24px, 6.5cqw, 56px);
         }
 
         .corner-button {
           position: absolute;
-          bottom: clamp(12px, 2.5vmin, 24px);
+          bottom: clamp(12px, 3cqw, 24px);
           z-index: 4;
-          width: clamp(48px, 9vmin, 72px);
-          height: clamp(48px, 9vmin, 72px);
+          width: clamp(36px, 9cqw, 72px);
+          height: clamp(36px, 9cqw, 72px);
         }
 
         .corner-button.left {
-          left: clamp(12px, 2.5vmin, 24px);
+          left: clamp(12px, 3cqw, 24px);
         }
 
         .corner-button.right {
-          right: clamp(12px, 2.5vmin, 24px);
+          right: clamp(12px, 3cqw, 24px);
         }
 
         .corner-button ha-icon {
-          --mdc-icon-size: clamp(24px, 4.5vmin, 34px);
+          --mdc-icon-size: clamp(20px, 4.5cqw, 34px);
         }
 
         .badge {
@@ -213,7 +214,7 @@ class SipIndoorStationCard extends HTMLElement {
         .status {
           position: absolute;
           left: 50%;
-          bottom: calc(clamp(72px, 15vmin, 120px) + clamp(22px, 4vmin, 42px));
+          bottom: calc(clamp(48px, 14cqw, 120px) + clamp(14px, 4cqw, 42px));
           transform: translateX(-50%);
           z-index: 3;
           max-width: min(280px, calc(100% - 24px));
