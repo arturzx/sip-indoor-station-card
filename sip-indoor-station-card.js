@@ -55,6 +55,71 @@ class SipIndoorStationCard extends HTMLElement {
     this._renderState();
   }
 
+  connectedCallback() {
+    customElements.whenDefined("advanced-camera-card").then(() => {
+      const cameraCard = this.shadowRoot?.getElementById("camera-card");
+      if (!cameraCard || cameraCard.dataset.hardReloadFixed) return;
+
+      // 1. SYSTEMATIC VIEWPORT OBSERVER: Monitor the container bounds natively.
+      // This waits exactly until the browser calculates and stretches the layout columns.
+      const observer = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          const width = entry.contentRect.width;
+          const height = entry.contentRect.height;
+
+          // Trigger only once the layout container moves past the initial un-rendered 0px footprint
+          if (width > 0 && height > 0 && !cameraCard.dataset.hardReloadFixed) {
+            cameraCard.dataset.hardReloadFixed = "true"; // Enforce absolute protection against loops
+            observer.disconnect(); // Stop watching immediately to preserve system performance
+
+            const parentContainer = cameraCard.parentNode;
+            if (parentContainer && this._hass) {
+
+              // A. Programmatically construct a fresh native element instance from the registry
+              const activeCamCard = document.createElement("advanced-camera-card");
+              activeCamCard.id = "camera-card";
+              activeCamCard.hass = this._hass;
+
+              // B. Re-run the parent card's configuration loop to dynamically parse user variables
+              if (typeof this._configureAdvancedCameraCard === 'function') {
+                const originalGet = this.shadowRoot.getElementById;
+                this.shadowRoot.getElementById = (id) => id === "camera-card" ? activeCamCard : originalGet.call(this.shadowRoot, id);
+                this._configureAdvancedCameraCard();
+                this.shadowRoot.getElementById = originalGet; // Restore original bindings immediately
+              }
+
+              // C. Extract the compiled configuration object, attach a cache-buster, and save it
+              const compiledConfig = activeCamCard._config || activeCamCard.config;
+              if (compiledConfig) {
+                activeCamCard.setConfig({
+                  ...compiledConfig,
+                  _hard_reload_tick: Date.now()
+                });
+              }
+
+              // D. Physically swap the broken layout node with our active instance
+              parentContainer.replaceChild(activeCamCard, cameraCard);
+
+              // E. ZERO-GUESSWORK PAINT ALIGNMENT: requestAnimationFrame guarantees the browser 
+              // has completed attaching the node and rendering its layout box boundaries 
+              // before we kick the internal go2rtc proxy player pipeline to life!
+              requestAnimationFrame(() => {
+                if (typeof activeCamCard.requestUpdate === 'function') {
+                  activeCamCard.requestUpdate();
+                }
+                window.dispatchEvent(new Event('resize'));
+                activeCamCard.dispatchEvent(new Event('resize', { bubbles: true }));
+              });
+            }
+          }
+        }
+      });
+
+      // Begin monitoring the camera element layout box boundaries natively
+      observer.observe(cameraCard);
+    });
+  }
+
   disconnectedCallback() {
     this._disconnectAudio();
   }
